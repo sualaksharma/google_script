@@ -1,0 +1,44 @@
+var ss = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1ILrIlS5-NFba8gf6mwDZK478sEtwpBuXCI4epRWzViQ/edit#gid=0");
+
+var sheet = ss.getSheetByName('Orders');  
+
+
+function doPost(e){
+var action = e.parameter.action;
+
+if(action == 'addItem'){
+  return addItem(e);
+
+}
+
+}
+
+
+
+
+
+function addItem(e){
+
+var date =  new Date();
+
+var id  =  "Order "+sheet.getLastRow(); // Order1
+
+var itemName = e.parameter.itemName;
+
+var brand = e.parameter.brand;
+
+var pincode = e.parameter.pincode;
+
+var mobile = e.parameter.mobile;
+
+var order = e.parameter.order;
+
+var instructions = e.parameter.instructions;
+
+sheet.appendRow([date,id,itemName,brand,pincode,mobile,order,instructions]);
+
+   return ContentService.createTextOutput("Success").setMimeType(ContentService.MimeType.TEXT);
+
+
+
+}
